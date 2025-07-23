@@ -20,7 +20,7 @@ O projeto é dividido em duas partes principais:
 
 Backend (Machine Learning):
 
-Um script Python (provavelmente usando bibliotecas como scikit-learn e pandas) é responsável por:
+Um script Python (usando bibliotecas como scikit-learn e pandas) é responsável por:
 
 Carregar dados de Pokémon e dados de batalhas históricas.
 
@@ -36,7 +36,7 @@ Frontend (Aplicação Web):
 
 Desenvolvido em HTML, CSS e JavaScript puro.
 
-A função loadData() carrega assincronamente os arquivos pokemon_list.json, predictions.json, pokemon_sprites.json e model_metadata.json.
+A função <code>loadData()</code> carrega assincronamente os arquivos pokemon_list.json, predictions.json, pokemon_sprites.json e model_metadata.json.
 
 A função predictWinner() é acionada quando o usuário seleciona os Pokémon. Ela consulta o predictions.json (que contém as previsões pré-calculadas) usando uma chave de lookup padronizada (ex: menorID_maiorID) para encontrar o vencedor.
 
