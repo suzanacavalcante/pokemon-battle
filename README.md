@@ -4,7 +4,7 @@ Este projeto é uma aplicação web interativa que prediz o vencedor de batalhas
 
 O frontend web permite aos usuários selecionar dois Pokémon de uma lista e, instantaneamente, ver a previsão do vencedor e a acurácia geral do modelo.
 
-# 🌟 Funcionalidades
+## 🌟 Funcionalidades
 Seleção Interativa de Pokémon: Escolha dois Pokémon de uma lista completa através de menus suspensos.
 
 Previsão de Batalha Instantânea: Veja o vencedor previsto da batalha com base em um modelo de ML pré-calculado.
@@ -18,31 +18,20 @@ Tratamento de Erros: Mensagens amigáveis para seleções inválidas (Pokémon n
 # 🧠 Como Funciona? (Visão Geral Técnica)
 O projeto é dividido em duas partes principais:
 
-Backend (Machine Learning):
+### Backend (Machine Learning):
+  - Um script Python (usando as bibliotecas scikit-learn e pandas) é responsável por:
+  - Carregar dados de Pokémon e dados de batalhas históricas.
+  - Realizar engenharia de features (ex: calcular diferenças de stats, tipos, etc.).
+  - Treinar um modelo de Regressão Logística para prever o vencedor de uma batalha.
+  - Pré-calcular as previsões para todas as combinações possíveis de batalhas e salvar esses resultados em um arquivo JSON (predictions.json).
+  - Salvar metadados do modelo, como sua acurácia, em outro arquivo JSON (model_metadata.json).
 
-Um script Python (usando as bibliotecas scikit-learn e pandas) é responsável por:
-
-Carregar dados de Pokémon e dados de batalhas históricas.
-
-Realizar engenharia de features (ex: calcular diferenças de stats, tipos, etc.).
-
-Treinar um modelo de Regressão Logística para prever o vencedor de uma batalha.
-
-Pré-calcular as previsões para todas as combinações possíveis de batalhas e salvar esses resultados em um arquivo JSON (predictions.json).
-
-Salvar metadados do modelo, como sua acurácia, em outro arquivo JSON (model_metadata.json).
-
-Frontend (Aplicação Web):
-
-Desenvolvido em HTML, CSS e JavaScript puro.
-
-A função <code>loadData()</code> carrega assincronamente os arquivos pokemon_list.json, predictions.json, pokemon_sprites.json e model_metadata.json.
-
-A função <code>predictWinner()</coode> é acionada quando o usuário seleciona os Pokémon. Ela consulta o predictions.json (que contém as previsões pré-calculadas) usando uma chave de lookup padronizada para encontrar o vencedor.
-
-A acurácia do modelo é exibida na interface do usuário através da função <code>displayModelAccuracy()</code>.
-
-Os sprites dos Pokémon são carregados dinamicamente para melhorar a experiência visual.
+### Frontend (Aplicação Web):
+  - Desenvolvido em HTML, CSS e JavaScript puro.
+  - A função <code>loadData()</code> carrega assincronamente os arquivos pokemon_list.json, predictions.json, pokemon_sprites.json e model_metadata.json.
+  - A função <code>predictWinner()</coode> é acionada quando o usuário seleciona os Pokémon. Ela consulta o predictions.json (que contém as previsões pré-calculadas) usando uma chave de lookup padronizada para encontrar o vencedor.
+  - A acurácia do modelo é exibida na interface do usuário através da função <code>displayModelAccuracy()</code>.
+  - Os sprites dos Pokémon são carregados dinamicamente para melhorar a experiência visual.
 
 # 🛠️ Instalação e Configuração (Para rodar localmente)
 Siga estas etapas para configurar e rodar o projeto em sua máquina local:
