@@ -1,0 +1,117 @@
+body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 1460px; /* Mantendo um max-width, mas permitindo flexibilidade */
+            width: 95%; /* Usar porcentagem para ser mais responsivo */
+            margin-bottom: 30px;
+            overflow: auto; /* Garante que nada saia do container */
+        }
+        h1 {
+            color: #d32f2f; /* Vermelho Pokémon */
+            margin-bottom: 25px;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        /* Wrapper para a tabela para permitir rolagem horizontal */
+        .table-responsive {
+            overflow-x: auto; /* Adiciona barra de rolagem horizontal se necessário */
+            width: 100%; /* Ocupa a largura total do container */
+            border-radius: 10px; /* Mantém os cantos arredondados do container */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Sombra para a tabela */
+        }
+        .pokemon-table {
+            width: 100vh; /* A tabela ocupa 100% do seu wrapper */
+            border-collapse: separate;
+            border-spacing: 0;
+            /* Removido margin-top e box-shadow daqui, pois estão no table-responsive */
+        }
+        .pokemon-table th, .pokemon-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eceff1;
+            white-space: nowrap; /* Impede que o texto quebre em várias linhas */
+        }
+        .pokemon-table th {
+            background-color: #ef5350; /* Vermelho mais claro */
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+        .pokemon-table tbody tr:nth-child(even) {
+            background-color: #fce4ec; /* Rosa claro para linhas pares */
+        }
+        .pokemon-table tbody tr:hover {
+            background-color: #ffebee; /* Vermelho ainda mais claro no hover */
+            cursor: pointer;
+        }
+        .pokemon-table td {
+            font-size: 0.95em;
+            color: #424242;
+        }
+        /* Arredondamento para os cantos da tabela - aplicado ao wrapper agora */
+        .table-responsive {
+            border-radius: 10px;
+        }
+        .pokemon-table thead tr:first-child th:first-child {
+            border-top-left-radius: 10px;
+        }
+        .pokemon-table thead tr:first-child th:last-child {
+            border-top-right-radius: 10px;
+        }
+        .pokemon-table tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 10px;
+        }
+        .pokemon-table tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 10px;
+        }
+        .info-footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #777;
+        }
+        button {
+            background-color: #424242; /* Cinza escuro */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #616161;
+            transform: translateY(-2px);
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        /* Estilo para as imagens dos sprites */
+        .pokemon-sprite {
+            width: 100px; /* Tamanho fixo para o sprite */
+            height: 60px;
+            object-fit: contain; /* Garante que a imagem se ajuste sem cortar */
+            vertical-align: middle; /* Alinha a imagem com o texto na célula */
+            border-radius: 8px; /* Cantos arredondados para a imagem */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }

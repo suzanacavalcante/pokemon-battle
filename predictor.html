@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsor de Batalhas Pokémon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Previsor de Batalhas Pokémon</h1>
+
+        <div class="model-info">
+            <h2>Informações do Modelo:</h2>
+            <p>Acurácia de Previsão: <span id="model-accuracy">Carregando...</span></p>
+            <p id="accuracy-explanation">
+                Um modelo de Machine Learning raramente atinge 100% de acurácia por diversas razões:
+                <ul>
+                    <li>**Dados Imperfeitos:** Dados de treinamento podem ter ruídos, inconsistências ou não cobrir todas as situações possíveis.</li>
+                    <li>**Complexidade do Problema:** Batalhas Pokémon envolvem muitos fatores (estatísticas, tipos, habilidades, itens, sorte) que um modelo simplificado pode não capturar totalmente.</li>
+                    <li>**Overfitting:** O modelo pode ter aprendido demais os detalhes específicos dos dados de treino, perdendo a capacidade de generalizar para novos dados.</li>
+                    <li>**Limitações do Algoritmo:** Cada algoritmo de ML tem suas próprias forças e fraquezas. A Regressão Logística, por exemplo, é linear e pode não modelar relações complexas não-lineares.</li>
+                    <li>**Imprevisibilidade Inerente:** Alguns eventos podem ter um grau de aleatoriedade ou serem influenciados por fatores não presentes nos dados.</li>
+                </ul>
+                Apesar de não ser 100% preciso, um modelo com boa acurácia ainda é muito útil para fazer previsões e identificar tendências.
+            </p>
+        </div>
+
+        <div class="pokemon-selector">
+            <div class="selector-group">
+                <label for="pokemon1-select">Pokémon 1:</label>
+                <select id="pokemon1-select"></select>
+            </div>
+            <span>VS</span>
+            <div class="selector-group">
+                <label for="pokemon2-select">Pokémon 2:</label>
+                <select id="pokemon2-select"></select>
+            </div>
+        </div>
+
+        <button onclick="predictWinner()">Prever Vencedor</button>
+
+        <div id="result-container">
+            Selecione dois Pokémon para prever o vencedor!
+        </div>
+
+        <button><a href="index.html">Visualizar Pokedex</a></button>
+
+    </div>
+
+    <script>
+        // Nomes dos arquivos JSON (devem estar na mesma pasta do HTML)
+        const POKEMON_LIST_JSON_FILE = 'pokemon_list.json';
+        const PREDICTIONS_JSON_FILE = 'predictions.json';
+        const POKEMON_SPRITES_JSON_FILE = 'pokemon_sprites.json';
+        const MODEL_METADATA_JSON_FILE = 'model_metadata.json'; // NOME DO ARQUIVO ATUALIZADO
+
+        let allPokemonData = []; // Para armazenar id e nome dos Pokémon
+        let precomputedPredictions = {}; // Para armazenar as previsões pré-computadas
+        let pokemonSprites = {}; // Para armazenar URLs dos sprites
+        let modelAccuracy = null; // Para armazenar a acurácia do modelo
+
+        const pokemon1Select = document.getElementById('pokemon1-select');
+        const pokemon2Select = document.getElementById('pokemon2-select');
+        const resultContainer = document.getElementById('result-container');
+        const modelAccuracySpan = document.getElementById('model-accuracy');
+        // A explicação agora é estática no HTML, então não precisamos buscar o elemento
+
+        // Função para carregar os dados JSON
+        async function loadData() {
+            console.log('Loading data...'); // Log de depuração
+            try {
+                // Carregar lista de Pokémon
+                const pokemonListResponse = await fetch(POKEMON_LIST_JSON_FILE);
+                allPokemonData = await pokemonListResponse.json();
+                console.log('allPokemonData after fetch:', allPokemonData); // Log de depuração
+
+                // Carregar previsões pré-computadas
+                const predictionsResponse = await fetch(PREDICTIONS_JSON_FILE);
+                precomputedPredictions = await predictionsResponse.json();
+                console.log('precomputedPredictions loaded.'); // Log de depuração
+
+                // Carregar dados de sprites
+                const spritesResponse = await fetch(POKEMON_SPRITES_JSON_FILE);
+                pokemonSprites = await spritesResponse.json();
+                console.log('pokemonSprites loaded.'); // Log de depuração
+
+                // NOVO: Carregar a acurácia do modelo do arquivo renomeado
+                const accuracyResponse = await fetch(MODEL_METADATA_JSON_FILE); // ATUALIZADO AQUI
+                const accuracyData = await accuracyResponse.json();
+                modelAccuracy = accuracyData.accuracy;
+                console.log('Model accuracy loaded:', modelAccuracy); // Log de depuração
+
+                populateDropdowns();
+                displayModelAccuracy(); // Chamar nova função para exibir a acurácia
+                console.log('Dados carregados com sucesso!');
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                resultContainer.innerHTML = '<p class="error-message">Erro ao carregar dados de Pokémon ou previsões. Verifique os arquivos JSON.</p>';
+                modelAccuracySpan.textContent = 'Erro ao carregar!';
+            }
+        }
+
+        // Nova função para exibir a acurácia do modelo
+        function displayModelAccuracy() {
+            if (modelAccuracy !== null) {
+                modelAccuracySpan.textContent = `${(modelAccuracy * 100).toFixed(2)}%`;
+            }
+        }
+
+        // Função para popular os dropdowns
+        function populateDropdowns() {
+            console.log('Populating dropdowns with:', allPokemonData.length, 'pokemon'); // Log de depuração
+            pokemon1Select.innerHTML = '<option value="">-- Selecione Pokémon 1 --</option>';
+            pokemon2Select.innerHTML = '<option value="">-- Selecione Pokémon 2 --</option>';
+
+            allPokemonData.forEach(pokemon => {
+                const option1 = document.createElement('option');
+                option1.value = pokemon.id;
+                option1.textContent = pokemon.Name;
+                pokemon1Select.appendChild(option1);
+
+                const option2 = document.createElement('option');
+                option2.value = pokemon.id;
+                option2.textContent = pokemon.Name;
+                pokemon2Select.appendChild(option2);
+            });
+        }
+
+        // Função para prever o vencedor
+        function predictWinner() {
+            const pokemon1Id = parseInt(pokemon1Select.value);
+            const pokemon2Id = parseInt(pokemon2Select.value);
+
+            if (!pokemon1Id || !pokemon2Id) {
+                resultContainer.innerHTML = '<p class="error-message">Por favor, selecione ambos os Pokémon.</p>';
+                return;
+            }
+
+            if (pokemon1Id === pokemon2Id) {
+                resultContainer.innerHTML = '<p class="error-message">Pokémon não podem lutar contra si mesmos!</p>';
+                return;
+            }
+
+            // Para garantir que a chave de lookup seja sempre a mesma (menorID_maiorID)
+            const lookupKey = `${Math.min(pokemon1Id, pokemon2Id)}_${Math.max(pokemon1Id, pokemon2Id)}`;
+            
+            // A previsão agora deve conter tanto o ID do vencedor quanto a probabilidade
+            // Note: O predictions.json agora só tem o winner_id, não a probabilidade.
+            // Se você quiser a probabilidade aqui, o generate_front.py precisaria salvá-la.
+            const predictedWinnerId = precomputedPredictions[lookupKey];
+
+            if (predictedWinnerId) {
+                const winnerPokemon = allPokemonData.find(p => p.id === predictedWinnerId);
+                let winnerName = winnerPokemon ? winnerPokemon.Name : 'Desconhecido';
+
+                // Tentar obter o sprite do vencedor do objeto pokemonSprites
+                const winnerSpriteUrl = pokemonSprites[predictedWinnerId] || 'https://placehold.co/100x100/cccccc/000000?text=No+Img';
+
+                resultContainer.innerHTML = `
+                    <p>O vencedor previsto é:</p>
+                    <p style="font-size: 1.5em; color: #d32f2f;">${winnerName}</p>
+                    <img id="winner-sprite" src="${winnerSpriteUrl}" alt="${winnerName} Sprite">
+                `;
+            } else {
+                resultContainer.innerHTML = '<p class="error-message">Previsão não encontrada para esta combinação. (Isso não deveria acontecer)</p>';
+            }
+        }
+
+        // Carregar dados quando a página é carregada
+        loadData();
+    </script>
+</body>
+</html>
