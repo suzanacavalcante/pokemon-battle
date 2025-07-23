@@ -1,5 +1,5 @@
 # 🚀 Título do Projeto: Batalha Pokémon Predictor
-✨ Descrição do Projeto
+## ✨ Descrição do Projeto
 Este projeto é uma aplicação web interativa que prediz o vencedor de batalhas entre dois Pokémon, utilizando um modelo de Machine Learning pré-treinado. Com base em características e estatísticas dos Pokémon, o modelo fornece uma previsão da batalha. O objetivo é demonstrar a aplicação prática de modelos de classificação em um contexto divertido e familiar como o universo Pokémon.
 
 O frontend web permite aos usuários selecionar dois Pokémon de uma lista e, instantaneamente, ver a previsão do vencedor e a acurácia geral do modelo.
