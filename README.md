@@ -36,27 +36,27 @@ O projeto é dividido em duas partes principais:
 # 🛠️ Instalação e Configuração (Para rodar localmente)
 Siga estas etapas para configurar e rodar o projeto em sua máquina local:
 
-1 - Clone o Repositório:
-git clone https://github.com/suzanacavalcante/pokemon-battle
-cd SEU-REPOSITORIO
+## 1 - Clone o Repositório:
+  git clone https://github.com/suzanacavalcante/pokemon-battle
+  cd SEU-REPOSITORIO
 
-2- Estrutura de Arquivos:
-Certifique-se de que os arquivos estejam como o esperado:
-.
-├── index.html
-├── style.css
-├── pokemon_list.json
-├── predictions.json
-├── pokemon_sprites.json
-├── predictor.html
-├── analisar_batalhas.py
-├── generate_front.py
-├── gerar_pokedex.py
-├── final_combats.csv
-├── final_pokemon.csv
-└── model_metadata.json
+## 2- Estrutura de Arquivos:
+  Certifique-se de que os arquivos estejam como o esperado:
+  .
+  ├── index.html
+  ├── style.css
+  ├── pokemon_list.json
+  ├── predictions.json
+  ├── pokemon_sprites.json
+  ├── predictor.html
+  ├── analisar_batalhas.py
+  ├── generate_front.py
+  ├── gerar_pokedex.py
+  ├── final_combats.csv
+  ├── final_pokemon.csv
+  └── model_metadata.json
 
-3 - Executar o Frontend:
+## 3 - Executar o Frontend:
 Como o frontend é puramente HTML, CSS e JavaScript, você pode simplesmente abrir o arquivo index.html em seu navegador.
 
   - Se você tem Python instalado:
@@ -68,12 +68,12 @@ Como o frontend é puramente HTML, CSS e JavaScript, você pode simplesmente abr
   /predictor.html
 
 # 💻 Tecnologias Utilizadas
-Frontend:
+## Frontend:
 HTML5
 CSS3
 JavaScript (ES6+)
 
-Machine Learning / Backend (para gerar os dados):
+## Machine Learning / Backend (para gerar os dados):
 Python
 Pandas
 Scikit-learn (especificamente LogisticRegression)
