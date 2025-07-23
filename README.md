@@ -20,7 +20,7 @@ O projeto é dividido em duas partes principais:
 
 Backend (Machine Learning):
 
-Um script Python (usando bibliotecas como scikit-learn e pandas) é responsável por:
+Um script Python (usando as bibliotecas scikit-learn e pandas) é responsável por:
 
 Carregar dados de Pokémon e dados de batalhas históricas.
 
@@ -38,59 +38,9 @@ Desenvolvido em HTML, CSS e JavaScript puro.
 
 A função <code>loadData()</code> carrega assincronamente os arquivos pokemon_list.json, predictions.json, pokemon_sprites.json e model_metadata.json.
 
-A função predictWinner() é acionada quando o usuário seleciona os Pokémon. Ela consulta o predictions.json (que contém as previsões pré-calculadas) usando uma chave de lookup padronizada (ex: menorID_maiorID) para encontrar o vencedor.
+A função <code>predictWinner()</coode> é acionada quando o usuário seleciona os Pokémon. Ela consulta o predictions.json (que contém as previsões pré-calculadas) usando uma chave de lookup padronizada para encontrar o vencedor.
 
-A acurácia do modelo é exibida na interface do usuário através da função displayModelAccuracy().
-
-Os sprites dos Pokémon são carregados dinamicamente para melhorar a experiência visual.
-
-Com certeza! Um bom README.md é a porta de entrada para o seu projeto no GitHub, explicando o que ele faz, como funciona e como outras pessoas podem usá-lo ou contribuir.
-
-Baseado nas explicações que você me deu sobre seu projeto (previsão de batalhas Pokémon com Machine Learning, usando um frontend para exibir os resultados), preparei um modelo que você pode preencher e adaptar.
-
-🚀 Título do Projeto: Batalha Pokémon Predictor
-✨ Descrição do Projeto
-Este projeto é uma aplicação web interativa que prediz o vencedor de batalhas entre dois Pokémon, utilizando um modelo de Machine Learning pré-treinado. Com base em características e estatísticas dos Pokémon, o modelo fornece uma previsão da batalha. O objetivo é demonstrar a aplicação prática de modelos de classificação em um contexto divertido e familiar como o universo Pokémon.
-
-O frontend web permite aos usuários selecionar dois Pokémon de uma lista e, instantaneamente, ver a previsão do vencedor e a acurácia geral do modelo.
-
-🌟 Funcionalidades
-Seleção Interativa de Pokémon: Escolha dois Pokémon de uma lista completa através de menus suspensos.
-
-Previsão de Batalha Instantânea: Veja o vencedor previsto da batalha com base em um modelo de ML pré-calculado.
-
-Exibição de Sprites: Veja a imagem (sprite) do Pokémon vencedor para uma experiência visual aprimorada.
-
-Acurácia do Modelo: Visualiza a acurácia geral do modelo de Machine Learning utilizado nas previsões.
-
-Tratamento de Erros: Mensagens amigáveis para seleções inválidas (Pokémon não selecionados ou o mesmo Pokémon duas vezes).
-
-🧠 Como Funciona (Visão Geral Técnica)
-O projeto é dividido em duas partes principais:
-
-Backend (Machine Learning):
-
-Um script Python (provavelmente usando bibliotecas como scikit-learn e pandas) é responsável por:
-
-Carregar dados de Pokémon e dados de batalhas históricas.
-
-Realizar engenharia de features (ex: calcular diferenças de stats, tipos, etc.).
-
-Treinar um modelo de Regressão Logística para prever o vencedor de uma batalha.
-
-Pré-calcular as previsões para todas as combinações possíveis de batalhas e salvar esses resultados em um arquivo JSON (predictions.json).
-
-Salvar metadados do modelo, como sua acurácia, em outro arquivo JSON (model_metadata.json).
-
-Frontend (Aplicação Web):
-
-Desenvolvido em HTML, CSS e JavaScript puro.
-
-A função loadData() carrega assincronamente os arquivos pokemon_list.json, predictions.json, pokemon_sprites.json e model_metadata.json.
-
-A função predictWinner() é acionada quando o usuário seleciona os Pokémon. Ela consulta o predictions.json (que contém as previsões pré-calculadas) usando uma chave de lookup padronizada (ex: menorID_maiorID) para encontrar o vencedor.
-
-A acurácia do modelo é exibida na interface do usuário através da função displayModelAccuracy().
+A acurácia do modelo é exibida na interface do usuário através da função <code>displayModelAccuracy()</code>.
 
 Os sprites dos Pokémon são carregados dinamicamente para melhorar a experiência visual.
 
